@@ -24,20 +24,20 @@ jobs:
         uses: akeyless-community/akeyless-github-action@v1.0.1
         id: fetch-secrets
         with:
-          access-id: '${{ secrets.ACCESS_ID }}'
+          access-id: ${{ secrets.ACCESS_ID }}
           access-type: jwt
           export-secrets-to-outputs: true
           export-secrets-to-environment: true
           static-secrets: |
             - name: "/SJ-Test-Static-Key"
               output-name: "my_first_secret"
-          api-url: "https://csm.thalescryptolabs.com/akeyless-api/v2"
+          api-url: https://csm.thalescryptolabs.com/akeyless-api/v2
     
       - name: Debugging Info - After Fetch
         run: |
-          env
           echo "Debug: Fetched Secret Output Name = ${{ steps.fetch-secrets.outputs.my_first_secret }}"
           echo "Debug: Fetched Secret Environment Variable = ${{ env.my_first_secret }}"
+          env
     
       - name: Use Akeyless secret (environment variable)
         env:
