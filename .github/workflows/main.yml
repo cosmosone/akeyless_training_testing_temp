@@ -1,6 +1,7 @@
 name: Fetch Static Secrets
 
-'on': push
+on: 
+  push: 
 
 jobs:
   fetch_secrets:
@@ -31,15 +32,12 @@ jobs:
           - name: "/SJ-Test-Static-Key"
             output-name: "my_first_secret"
         api-url: "https://csm.thalescryptolabs.com/akeyless-api/v2"
-      env:
-        # Optional: If you need to inspect what is being set in GITHUB_TOKEN or any other variables.
-        DEBUG: true
     
     - name: Debugging Info - After Fetch
       run: |
-        env
         echo "Debug: Fetched Secret Output Name - my_first_secret = ${{ steps.fetch-secrets.outputs.my_first_secret }}"
         echo "Debug: Fetched Secret Environment Variable - my_first_secret = ${{ env.my_first_secret }}"
+        env
     
     - name: Use Akeyless secret (environment variable)
       env:
